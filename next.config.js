@@ -8,7 +8,8 @@ const nextConfig = {
             'diengcyber.com',
             'www.kodingakademi.id',
             'encrypted-tbn0.gstatic.com',
-            'blogger.googleusercontent.com'
+            'blogger.googleusercontent.com',
+            'i.ibb.co'
         ],
     },
 }
