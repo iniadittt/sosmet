@@ -49,11 +49,6 @@ const Dashboard = () => {
   }, [user])
 
   React.useEffect(() => {
-    console.log({room})
-  }, [room])
-  
-
-  React.useEffect(() => {
     const dataRef = query(
       ref(db, DB_CHAT)
     )
@@ -151,7 +146,10 @@ const Dashboard = () => {
             <nav className='mx-auto w-full h-full lg:py-3 lg:flex lg:justify-between'>
               <h1 className='w-1/3 font-semibold text-2xl my-auto'>SOSMET</h1>
               <div className='w-2/3 lg:flex lg:justify-end my-auto h-full'>
-                <button onClick={signOutGoogle} className='py-2 px-9 bg-[#25D366] border-[1px] border-slate-600 text-[#FCF5EB] rounded-3xl'>Logout</button>
+                <button
+                  onClick={signOutGoogle}
+                  className='py-2 px-9 bg-[#25D366] border-[1px] border-slate-600 text-[#FCF5EB] rounded-3xl'
+                >Logout</button>
               </div>
             </nav>
           </div>
@@ -160,8 +158,23 @@ const Dashboard = () => {
           <div className='w-1/3 flex flex-col gap-4'>
             
             <div className='w-full flex relative'>
-              <Image width={24} height={24} src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search icon" className='absolute top-3 left-2'/>
-              <input type="text" name="search" id="search" className='w-full bg-[#FCF5EB] border-2 border-gray-300 pl-10 pr-4 py-2 rounded-md my-auto' onChange={e => setSearch(e.target.value)} value={search} placeholder='Belum Dapat Digunakan' disabled/>
+              <Image
+                width={24}
+                height={24}
+                src="https://img.icons8.com/ios-filled/50/search--v1.png"
+                alt="search icon"
+                className='absolute top-3 left-2'
+              />
+              <input 
+                type="text"
+                name="search"
+                id="search"
+                className='w-full bg-[#FCF5EB] border-2 border-gray-300 pl-10 pr-4 py-2 rounded-md my-auto'
+                onChange={e => setSearch(e.target.value)}
+                value={search}
+                placeholder='Belum Dapat Digunakan'
+                disabled
+              />
             </div>
 
 
@@ -170,9 +183,18 @@ const Dashboard = () => {
                 room &&
                 room.map((room: any) => {
                   if(room.active){
-                    return <div key={room.id} onClick={e => selectRoomFun(e, room.id)} className='cursor-pointer flex py-2 px-4 gap-4 bg-[#33322d]/20 rounded-md'>
+                    return <div
+                      key={room.id}
+                      onClick={e => selectRoomFun(e, room.id)}
+                      className='cursor-pointer flex py-2 px-4 gap-4 bg-[#33322d]/20 rounded-md'>
                     <div className='w-1/6 h-[4rem] rounded-[100000px] overflow-hidden my-auto'>
-                      <Image src={room.image} alt='ROOM 1' width={128} height={128} className='w-full h-full my-auto'/>
+                      <Image
+                        src={room.image}
+                        alt='ROOM 1'
+                        width={128}
+                        height={128}
+                        className='w-full h-full my-auto'
+                      />
                     </div>
                     <div className='my-auto'>
                       <h1 className='w-full h-7 font-semibold text-xl text-ellipsis overflow-hidden'>{room.nama}</h1>
@@ -180,15 +202,24 @@ const Dashboard = () => {
                     </div>
                   </div>
                   }else{
-                    return <div key={room.id} onClick={e => selectRoomFun(e, room.id)} className='cursor-pointer flex py-2 px-4 gap-4 bg-[#33322d]/5 rounded-md'>
-                  <div className='w-1/6 h-[4rem] rounded-[100000px] overflow-hidden my-auto'>
-                    <Image src={room.image} alt='ROOM 1' width={128} height={128} className='w-full h-full my-auto'/>
-                  </div>
-                  <div className='my-auto'>
-                    <h1 className='w-full h-7 font-semibold text-xl text-ellipsis overflow-hidden'>{room.nama}</h1>
-                    <p className='w-full h-5 text-sm text-ellipsis overflow-hidden'>Lorem ipsum dolor, sit amet!</p>
-                  </div>
-                </div>
+                    return <div
+                      key={room.id}
+                      onClick={e => selectRoomFun(e, room.id)}
+                      className='cursor-pointer flex py-2 px-4 gap-4 bg-[#33322d]/5 rounded-md'>
+                      <div className='w-1/6 h-[4rem] rounded-[100000px] overflow-hidden my-auto'>
+                        <Image
+                          src={room.image}
+                          alt='ROOM 1'
+                          width={128}
+                          height={128}
+                          className='w-full h-full my-auto'
+                        />
+                      </div>
+                      <div className='my-auto'>
+                        <h1 className='w-full h-7 font-semibold text-xl text-ellipsis overflow-hidden'>{room.nama}</h1>
+                        <p className='w-full h-5 text-sm text-ellipsis overflow-hidden'>Lorem ipsum dolor, sit amet!</p>
+                      </div>
+                    </div>
                   }
                 })
               }
@@ -201,10 +232,18 @@ const Dashboard = () => {
               selectRoom && messages && roomMessages && roomMessages.length > 0 ? 
                 roomMessages.map((message: any, index: any) => {
                   if(message.senderId !== user.uid){
-                    return <div key={index} className='w-full flex justify-start gap-4'>
+                    return <div
+                      key={index}
+                      className='w-full flex justify-start gap-4'>
                       <div className='w-3/4 p-2 flex gap-2'>
                         <div className='w-1/12 h-12 rounded-full overflow-hidden border-2 border-gray-700'>
-                          <Image src={ImageRoom} alt='Me' width={32} height={32} className='w-full h-full m-auto'/>
+                          <Image
+                            src={ImageRoom}
+                            alt='Me'
+                            width={32}
+                            height={32}
+                            className='w-full h-full m-auto'
+                          />
                         </div>
                         <div className='w-3/4 flex justify-start'>
                           <p className='max-w-fit bg-[#33322d]/10 text-left w-11/12 py-3 px-4 rounded-lg'>{message.message}</p>
@@ -212,7 +251,10 @@ const Dashboard = () => {
                       </div>
                     </div>
                   }else{
-                    return <div key={index} className='w-full flex justify-end gap-4'>
+                    return <div
+                      key={index}
+                      className='w-full flex justify-end gap-4'
+                    >
                       <div className='w-3/4 flex justify-end'>
                         <p className='max-w-max bg-[#33322d]/10 text-right py-3 px-4 rounded-lg'>{message.message}</p>
                       </div>
@@ -229,42 +271,25 @@ const Dashboard = () => {
               selectRoom &&
               <form onSubmit={sendMessage}>
                 <div className='w-full flex relative'>
-                  <Image width={24} height={24} src="https://img.icons8.com/material-rounded/24/filled-sent.png" alt="send icon" className='absolute top-5 right-4 cursor-pointer'/>
-                  <input type="text" name="search" id="search" className='w-full bg-[#FCF5EB] border-2 border-gray-300 pr-14 pl-4 py-4 rounded-md my-auto' value={chatBox} onChange={e => setChatBox(e.target.value)}/>
+                  <Image
+                    width={24}
+                    height={24}
+                    src="https://img.icons8.com/material-rounded/24/filled-sent.png"
+                    alt="send icon"
+                    className='absolute top-5 right-4 cursor-pointer'
+                  />
+                  <input
+                    type="text"
+                    name="search"
+                    id="search"
+                    className='w-full bg-[#FCF5EB] border-2 border-gray-300 pr-14 pl-4 py-4 rounded-md my-auto'
+                    value={chatBox}
+                    onChange={e => setChatBox(e.target.value)}
+                  />
                 </div>
               </form>
             }
           </div>
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
       </div>
       ) : (
@@ -272,8 +297,18 @@ const Dashboard = () => {
           <div className='w-1/3 h-80 my-auto p-8 bg-white rounded-2xl shadow-2xl flex flex-col justify-between'>
             <h1 className='text-4xl font-bold text-center'>Masuk Sosmet</h1>
             <p className='text-sm'>Berkirim pesan secara pribadi kepada orang terdekat. Sosmet berkomitmen menghubungkan kita dimana saja dan kapan saja.</p>
-            <button onClick={signInWithGoogle} className='w-full mb-8 bg-[#F5F5F5] py-2 flex justify-center gap-4 rounded-md shadow-md'>
-              <Image src={IconGoogle} alt='Google Icon' priority={true} width={18} height={18} className='my-auto'/>
+            <button
+              onClick={signInWithGoogle}
+              className='w-full mb-8 bg-[#F5F5F5] py-2 flex justify-center gap-4 rounded-md shadow-md'
+            >
+              <Image
+                src={IconGoogle}
+                alt='Google Icon'
+                priority={true}
+                width={18}
+                height={18}
+                className='my-auto'
+              />
               <span className='my-auto text-sm text-[#558AED] font-semibold'>Masuk Dengan Google</span>
             </button>
           </div>
