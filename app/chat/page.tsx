@@ -48,10 +48,37 @@ const Dashboard = () => {
     return () => off(dataRef, 'value', onDataChange)
   }, [user])
 
+  // React.useEffect(() => {
+  //   const dataRef = ref(db, 'users')
+  //   console.log({dataRef})
+  //   const onDataChange = (snapshot: any): any => {
+  //     console.log({snapshot})
+  //     const dataUsers = snapshot.val();
+  //     console.log({dataUsers})
+  //     if (dataUsers || Array.isArray(dataUsers)) {
+  //       const users = dataUsers.filter((userFromDb: any) => userFromDb.uid === user.uid);
+  //       console.log({users})
+  //       if(users.length === 0){
+  //         const newUsers = messages || []
+  //         console.log({newUsers})
+  //         const newUser = {
+  //           uid: user.uid,
+  //           email: user.email,
+  //           displayName: user.displayName,
+  //           photoURL: user.photoURL
+  //         }
+  //         console.log({newUser})
+  //         newUsers.push(newUser)
+  //         console.log({newUsers})
+  //         set(dataRef, newUsers)
+  //       }
+  //   };
+  //   onValue(dataRef, onDataChange);
+  //   return () => off(dataRef, 'value', onDataChange);
+  // }, [user])
+
   React.useEffect(() => {
-    const dataRef = query(
-      ref(db, DB_CHAT)
-    )
+    const dataRef = ref(db, DB_CHAT)
     const onDataChange = (snapshot: any): any => {
       const dataChats = snapshot.val()
       if (!dataChats && !Array.isArray(dataChats)) {
@@ -140,23 +167,23 @@ const Dashboard = () => {
   return (
     <>
       {user ? (
-        <div className='w-full h-full relative pt-24'>
-        <div className='fixed top-0 z-50 w-full bg-[#FCF5EB]/50 backdrop-blur-[2px] border-b-2 border-gray-300'>
-          <div className='container mx-auto h-full'>
-            <nav className='mx-auto w-full h-full lg:py-3 lg:flex lg:justify-between'>
-              <h1 className='w-1/3 font-semibold text-2xl my-auto'>SOSMET</h1>
-              <div className='w-2/3 lg:flex lg:justify-end my-auto h-full'>
-                <button
-                  onClick={signOutGoogle}
-                  className='py-2 px-9 bg-[#25D366] border-[1px] border-slate-600 text-[#FCF5EB] rounded-3xl'
-                >Logout</button>
-              </div>
-            </nav>
+        <div className='w-full h-full relative pt-20 lg:pt-24'>
+          <div className='fixed top-0 z-50 w-full bg-[#FCF5EB]/50 backdrop-blur-[2px] border-b-2 border-gray-300'>
+            <div className='container mx-auto h-full'>
+              <nav className='mx-auto w-full h-full py-3 lg:px-0 px-4 flex justify-between'>
+                <h1 className='w-1/2 lg:w-1/3 font-semibold text-2xl my-auto'>SOSMET</h1>
+                <div className='w-1/2 lg:w-2/3 flex justify-end my-auto h-full'>
+                  <button
+                    onClick={signOutGoogle}
+                    className='py-2 px-9 bg-[#25D366] border-[1px] border-slate-600 text-[#FCF5EB] rounded-3xl'
+                  >Logout</button>
+                </div>
+              </nav>
+            </div>
           </div>
-        </div>
-        <div className='container mx-auto flex gap-4 rounded-3xl'>
-          <div className='w-1/3 flex flex-col gap-4'>
-            
+
+        <div className='container mx-auto flex gap-4 rounded-3xl flex-wrap lg:flex-nowrap'>
+          <div className='w-full lg:w-1/3 flex flex-col gap-4'>
             <div className='w-full flex relative'>
               <Image
                 width={24}
@@ -176,8 +203,6 @@ const Dashboard = () => {
                 disabled
               />
             </div>
-
-
             <div id='room' className='w-full bg-[#FCF5EB] pb-4 flex flex-col gap-2 overflow-auto'>
               {
                 room &&
@@ -223,11 +248,10 @@ const Dashboard = () => {
                   }
                 })
               }
+            </div>
           </div>
-
-          </div>
-          <div id='message' className='w-2/3 h-[82vh] px-4 flex flex-col gap-4'>
-            <div className='h-full overflow-auto pr-4 flex flex-col gap-2'>
+          <div id='message' className='w-full lg:w-2/3 h-[82vh] px-4 flex flex-col gap-4'>
+            <div className='w-full h-full overflow-auto lg:pr-4 flex flex-col gap-2'>
             { 
               selectRoom && messages && roomMessages && roomMessages.length > 0 ? 
                 roomMessages.map((message: any, index: any) => {
@@ -262,15 +286,15 @@ const Dashboard = () => {
                   }
                 }
               ):
-              <div className='w-full h-full bg-[#33322d]/10 rounded-lg p-4'>
-                Pesan Tidak Ada
+              <div className='w-full h-full font-semibold text-md lg:text-lg bg-[#33322d]/10 rounded-lg p-4'>
+                Belum Ada Pesan
               </div>
             }
             </div>
             {
               selectRoom &&
               <form onSubmit={sendMessage}>
-                <div className='w-full flex relative'>
+                <div className='w-full flex relative z-10 mb-4 lg:mb-0'>
                   <Image
                     width={24}
                     height={24}
@@ -293,8 +317,8 @@ const Dashboard = () => {
         </div>
       </div>
       ) : (
-        <div className='w-full h-screen bg-[#FCF5EB] flex justify-center'>
-          <div className='w-1/3 h-80 my-auto p-8 bg-white rounded-2xl shadow-2xl flex flex-col justify-between'>
+        <div className='w-full h-screen bg-[#FCF5EB] flex justify-center px-4 lg:px-0'>
+          <div className='w-full lg:w-1/3 h-80 my-auto p-8 bg-white rounded-2xl shadow-2xl flex flex-col justify-between'>
             <h1 className='text-4xl font-bold text-center'>Masuk Sosmet</h1>
             <p className='text-sm'>Berkirim pesan secara pribadi kepada orang terdekat. Sosmet berkomitmen menghubungkan kita dimana saja dan kapan saja.</p>
             <button
@@ -309,7 +333,7 @@ const Dashboard = () => {
                 height={18}
                 className='my-auto'
               />
-              <span className='my-auto text-sm text-[#558AED] font-semibold'>Masuk Dengan Google</span>
+              <span className='my-auto text-md lg:text-sm text-[#558AED] font-semibold'>Masuk Dengan Google</span>
             </button>
           </div>
         </div>
